@@ -1,0 +1,27 @@
+# Build
+target/
+
+# Eclipse / STS
+.classpath
+.project
+.settings/
+.springBeans
+.sts3-class-manager-*.xml
+bin/
+
+# IntelliJ
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# DB 접속 정보 (비밀번호)
+src/main/resources/config/db.properties
+
+# 개인 필기
+필기.txt

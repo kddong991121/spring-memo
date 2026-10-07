@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memo">
+
+	<!-- 메모 목록보기 -->
+	<select id="list" resultType="mdto">
+		<!-- select * from tblMemo order by seq desc -->
+		select
+			m.seq,
+			m.memo,
+			m.regdate,
+			c.category,
+			c.color
+		from tblMemo m
+		inner join tblcategory c
+			on m.cseq = c.seq
+				order by m.seq
+					desc
+	</select>
+
+	<!-- 카테고리 목록보기 -->
+	<select id="clist" resultType="cdto">
+		select
+		*
+		from tblCategory
+		order by
+		seq asc
+	</select>
+	<insert id="add" parameterType="mdto">
+		insert into tblMemo
+		values(seqMemo.nextVal, #{memo},default, #{cseq})
+
+	</insert>
+
+	<select id="getMemo" parameterType="String" resultType="mdto">
+		select
+		*
+		from tblMemo
+		where seq = #{_parameter}
+	</select>
+	
+	<update id="edit" parameterType="mdto">
+		update tblMemo set
+			memo = #{memo},
+			cseq = #{cseq}
+				where seq = #{seq}
+	</update>
+	
+	<delete id="del" parameterType="String">
+		delete from tblMemo where seq = #{_parameter}
+	</delete>
+</mapper>
